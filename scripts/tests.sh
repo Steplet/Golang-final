@@ -61,7 +61,7 @@ check_api_simple() {
         
     else
         echo -e "${RED}✗ POST запрос неуспешен${NC}"
-        echo -e response
+        echo -e $response
         return 1
     fi
     
