@@ -19,6 +19,6 @@ echo "Installed Go modules"
 echo "SetUp DB..."
 
 CONNECTION_STRING="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
-psql "$CONNECTION_STRING" -f ./../init.sql
+psql "$CONNECTION_STRING" -f init.sql
 
 echo "SetUp DB end!"
