@@ -38,6 +38,7 @@ func PostPrice(db *sql.DB) http.HandlerFunc {
 			fileNames := strings.Split(f.Name, "/")
 			nameCsv := fileNames[len(fileNames)-1]
 
+			fmt.Printf("nameCsv: %s\n", nameCsv)
 			if strings.HasSuffix(nameCsv, ".csv") {
 				continue
 			}
