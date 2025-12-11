@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+# Load .env
+source ../.env
 
 DB_HOST=${POSTGRES_HOST:-localhost}
 DB_PORT=${POSTGRES_PORT:-5432}
