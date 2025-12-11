@@ -1,17 +1,13 @@
 #!/bin/bash
 
-DB_HOST=${POSTGRES_HOST:-localhost}
-DB_PORT=${POSTGRES_PORT:-5432}
-DB_NAME=${POSTGRES_DB:-appdb}
-DB_USER=${POSTGRES_USER:-postgres}
-DB_PASS=${POSTGRES_PASSWORD:-postgres}
-
-
-echo "SetUp DB..."
-
-CONNECTION_STRING="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
-psql "$CONNECTION_STRING" -f init.sql
-
-echo "SetUp DB end!"
-
 go run main.go &
+
+echo "Ожидаем, пока сервер будет готов..."
+for i in {1..10}; do
+  if curl -s http://localhost:8080 &> /dev/null; then
+    echo "Сервер успешно запущен и готов к работе."
+    exit 0
+  fi
+  echo "Попытка $i: сервер пока не готов..."
+  sleep 2
+done
