@@ -39,7 +39,7 @@ func PostPrice(db *sql.DB) http.HandlerFunc {
 			nameCsv := fileNames[len(fileNames)-1]
 
 			fmt.Printf("nameCsv: %s\n", nameCsv)
-			if strings.HasSuffix(nameCsv, ".csv") {
+			if !strings.HasSuffix(nameCsv, ".csv") {
 				continue
 			}
 
@@ -115,12 +115,12 @@ func insertData(reader *csv.Reader, db *sql.DB) (*ResponseStats, error) {
 
 		id, err := strconv.ParseInt(row[0], 10, 64)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("pars int: %w", err)
 		}
 
 		price, err := strconv.ParseFloat(row[3], 64)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("pars float: %w", err)
 		}
 
 		name := row[1]
